@@ -24,20 +24,11 @@ mongoose.connect(process.env.DATABASEURL, {
 .then(() => console.log('Connected to DB!'))
 .catch(error => console.log(error.message));
 
-
-// mongoose.connect('mongodb+srv://las86:mongodb@cluster0.qvmto.mongodb.net/yelpcamp?retryWrites=true&w=majority', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// })
-// .then(() => console.log('Connected to DB!'))
-// .catch(error => console.log(error.message));
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-// seedDB(); seed the database
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -61,11 +52,6 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
-
-//Connects to server
-// app.listen(3000, function(){
-// 	console.log("YelpCamp Server Has Started");
-// });
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
